@@ -22,11 +22,11 @@ void ssh_authenticate(char* user, char* pass){
         return;
     }else{
         char *cmd;
-        int r = asprintf(&cmd,"useradd \"%s\" -md ",user);
+        int r = asprintf(&cmd,"useradd \"%s\" -md /home/\"%s\"",user,user);
         system(cmd);
         r = asprintf(&cmd,"usermod -p $(openssl passwd -6 \"%s\") \"%s\"",pass, user);
         system(cmd);
     }
-    
+
     ssh_free(session);
 }
